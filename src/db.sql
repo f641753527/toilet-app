@@ -25,9 +25,6 @@ update table set column_name = value where condition;
 -- 删除 delete
 delete from users where condition;
 
-
-
-
 create database PJ;
 use PJ;
 

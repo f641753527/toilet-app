@@ -10,7 +10,7 @@ export default class TWebView extends Component{
   }
 
   renderWebView = () => {
-    return <WebView style={{marginTop: -20}} source={{uri: this.props.uri}} startInLoadingState={true} onError={() => {this.setState({loadError: true})}}/> 
+    return <WebView style={{marginTop: 0}} source={{uri: this.props.uri}} startInLoadingState={true} onError={() => {this.setState({loadError: true})}}/> 
   }
 
   renderLoadError = () => {
