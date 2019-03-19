@@ -5,7 +5,7 @@ import { Dimensions, PixelRatio } from 'react-native';
 const utils = {
   size: Dimensions.get('window'),
 
-  pixelRatio: PixelRatio.get(),
+  pixelRatio: 1 / PixelRatio.get(),
 
 };
 

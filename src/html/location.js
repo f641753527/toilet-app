@@ -58,5 +58,5 @@ function POISearch(point) {
       console.log(results.Ar);
     }
   });      
-  local.searchNearby("厕所", point, 2000);
+  local.searchNearby("酒店", point, 2000);
 }
