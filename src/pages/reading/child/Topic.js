@@ -1,23 +1,36 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-import utils from '../../../utils';
+import Fetch from '../../../utils/Fetch';
 
 export default class Topic extends Component{
 
   constructor(props) {
     super(props);
     this.state = {
-
+      list: [],
     }
   }
 
+  componentDidMount() {
+    Fetch.GET(`http://192.168.0.114:3000/client/news/list?type=${this.props.type}`).then((res) => {
+      const list = res.list || [];
+      this.setState({list});
+    });
+  }
+
   render() {
+    let title = '';
+    if (this.props.type === 6) {
+      title = '热门推荐';
+    } else if (this.props.type === 7) {
+      title = '清新一刻';
+    }
     return (
       <View style={ styles.container }>
-        <Text style={ styles.title }>{this.props.title}</Text>
+        <Text style={ styles.title }>{title}</Text>
         <View style={ styles.list }>
-          {this.props.list && this.props.list.length ? this.props.list.map(v => 
+          {this.state.list && this.state.list.length ? this.state.list.map(v => 
             <View style={ [styles.item] } key={v.id}>
               <Image style={ styles.item_cover_image } source={{uri: v.cover_img}}></Image>
               <Text numberOfLines={2} style={ styles.item_title }>{v.title}</Text>

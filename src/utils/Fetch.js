@@ -1,3 +1,4 @@
+
 const Fetch = new Object();
 
 Fetch.Type = {

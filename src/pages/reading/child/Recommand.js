@@ -8,8 +8,15 @@ export default class Recommand extends Component{
   constructor(props) {
     super(props);
     this.state = {
-
+      list: [],
     }
+  }
+
+  componentDidMount() {
+    Fetch.GET('http://192.168.0.114:3000/client/news/list?type=5').then((res) => {
+      const list = res.list || [];
+      this.setState({ list });
+    });
   }
 
   render() {
@@ -17,9 +24,9 @@ export default class Recommand extends Component{
       <View style={ styles.container }>
         <Text style={ styles.title }>推荐专题</Text>
         <View style={styles.img_list}>
-          <Image style={styles.img_item} source={{uri:'http://www.pptbz.com/pptpic/UploadFiles_6909/201203/2012031220134655.jpg' }}></Image>
-          <View style={styles.slot}></View>
-          <Image style={styles.img_item} source={{uri:'http://hellorfimg.zcool.cn/preview/291148670.jpg' }}></Image>
+          {
+            this.state.list ? this.state.list.map(v => <Image key={v.id} style={styles.img_item} source={{uri: v.cover_img }}></Image>) : null
+          }
         </View>
         <Text style={ styles.link }>查看同期专题 > </Text>
       </View>
@@ -29,7 +36,8 @@ export default class Recommand extends Component{
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10
+    padding: 10,
+    paddingRight: 0
   },
   title: {
     marginBottom: 10,
@@ -39,12 +47,9 @@ const styles = StyleSheet.create({
   img_list: {
     flexDirection: 'row'
   },
-  slot: {
-    width: 10,
-    flex: 0
-  },
   img_item: {
     flex: 1,
+    marginRight: 10,
     height: 100
   },
   link: {
