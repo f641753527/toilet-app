@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity  } from 'react-native';
 import utils from '../../../utils';
 
 export default class Category extends Component{
@@ -11,15 +11,19 @@ export default class Category extends Component{
     }
   }
 
+  _onPress = (i) => {
+    this.props.navigation.navigate({routeName: 'list', params: { type: i }} );
+  }
+
   render() {
     return (
       <View style={ styles.container }>
-        <Text style={ styles.title }>分类</Text>
-        <View style={ styles.row }>
-          {
-            this.state.list.map((v, i)=> <View style={ styles.item } key={i}><Text style={ styles.item_title }>{v}</Text></View>)
-          }
-        </View>
+          <Text style={ styles.title }>分类</Text>
+          <View style={ styles.row } >
+            {
+              this.state.list.map((v, i)=> <TouchableOpacity onPress={ () => {this._onPress(i+1)}} style={ styles.item } key={i}><Text style={ styles.item_title }>{v}</Text></TouchableOpacity>)
+            }
+          </View>
       </View>
     )
   }

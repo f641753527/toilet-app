@@ -1,3 +1,6 @@
+const domain = 'https://www.toilet.king-james.top';
+// const domain = 'http://192.168.0.114:8080';
+
 
 const Fetch = new Object();
 
@@ -7,8 +10,8 @@ Fetch.Type = {
   FORMDATA: 'multipart/form-data; charset=utf-8',
 };
 
-Fetch.POST = (url, options = {}) => request(url, 'POST', options);
-Fetch.GET = (url, options = {}) => request(url, 'GET', options);
+Fetch.POST = (url, options = {}) => request(domain + url, 'POST', options);
+Fetch.GET = (url, options = {}) => request(domain + url, 'GET', options);
 
 
 function request(url, method = 'POST', options = {}) {

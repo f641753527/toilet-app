@@ -35,12 +35,11 @@ export default class Reading extends Component{
         { 
         this.state.is_show ?
           <ScrollView style={ styles.container }>
-            <Recommand></Recommand>
+            <Recommand navigation={this.props.navigation}></Recommand>
             <Line></Line>
-            <Topic type={6}></Topic>
-            <Category></Category>
-            <Topic type={7}></Topic>
-            <List></List>
+            <Topic type={6} navigation={this.props.navigation}></Topic>
+            <Category navigation={this.props.navigation}></Category>
+            <Topic type={7} navigation={this.props.navigation}></Topic>
           </ScrollView>
         : null
         }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 import Fetch from '../../../utils/Fetch';
 
@@ -13,10 +13,14 @@ export default class Topic extends Component{
   }
 
   componentDidMount() {
-    Fetch.GET(`http://192.168.0.114:3000/client/news/list?type=${this.props.type}`).then((res) => {
+    Fetch.GET(`/client/news/list?type=${this.props.type}`).then((res) => {
       const list = res.list || [];
       this.setState({list});
     });
+  }
+
+  _onItemPress = (item) => {
+    this.props.navigation.navigate({routeName: 'detail', params: { uri: item.link }} );
   }
 
   render() {
@@ -31,10 +35,10 @@ export default class Topic extends Component{
         <Text style={ styles.title }>{title}</Text>
         <View style={ styles.list }>
           {this.state.list && this.state.list.length ? this.state.list.map(v => 
-            <View style={ [styles.item] } key={v.id}>
+            <TouchableOpacity style={ [styles.item] } key={v.id} onPress={() => {this._onItemPress(v)}}>
               <Image style={ styles.item_cover_image } source={{uri: v.cover_img}}></Image>
               <Text numberOfLines={2} style={ styles.item_title }>{v.title}</Text>
-            </View>
+            </TouchableOpacity>
           ) : null}
         </View>
       </View>

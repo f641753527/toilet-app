@@ -5,6 +5,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Bathroom from '../pages/bathroom';
 import Reading from '../pages/reading';
+import List from '../pages/reading/child/List';
+import Detail from '../pages/reading/child/detail';
 import Weather from '../pages/weather';
 import Config from '../pages/config';
 
@@ -30,6 +32,12 @@ const BathRoomNavigator = createStackNavigator({
 const ReadingRoomNavigator = createStackNavigator({
   reading: {
     screen: Reading
+  },
+  list: {
+    screen: List
+  },
+  detail: {
+    screen: Detail
   }
 }, {
   mode: 'modal',
